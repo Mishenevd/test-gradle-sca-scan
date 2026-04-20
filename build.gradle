@@ -39,6 +39,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // commented dependency with opening brace
+    //implementation 'org.springframework.boot:spring-boot-starter-security' {
+    //    exclude group: 'org.example', module: 'example-module'
+
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'com.h2database:h2:2.2.220'
