@@ -10,7 +10,6 @@ buildscript {
 plugins {
     id 'org.springframework.boot' version '3.5.0'
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
-    //id 'com.example.some-plugin' version '3.2.1'
     id 'com.example.some-plugin' version 'latest.release'
     id 'org.sonarqube' version '6.1.0.5360'
     id 'java-library'
@@ -29,7 +28,6 @@ configurations {
 }
 
 repositories {
-    //mavenLocal()
     mavenCentral()
 }
 
@@ -41,35 +39,23 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    // commented dependency with trailing brace-like structure
-    //implementation 'org.springframework.boot:spring-boot-starter-security' {
-    //    exclude group: 'org.example', module: 'example-module'
-    //}
-
-    implementation("org.springframework.boot:spring-boot-starter-web-services")
-    //implementation("org.springframework.boot:spring-boot-autoconfigure")
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'com.h2database:h2:2.2.220'
-    implementation("log4j:log4j:1.2.17") // added for vulnerability check
+    implementation 'log4j:log4j:1.2.17'
 
-    // messaging start
-    implementation(group: 'org.springframework', name: 'spring-jms')
+    implementation group: 'org.springframework', name: 'spring-jms'
     compileOnly 'jakarta.jms:jakarta.jms-api:3.1.0'
-    implementation (group: 'com.ibm.mq', name: 'mq-jms-spring-boot-starter', version: '3.0.0') {
+    implementation(group: 'com.ibm.mq', name: 'mq-jms-spring-boot-starter', version: '3.0.0') {
         exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
     }
-    // messaging end
 
-    implementation(group:'com.oracle.database.jdbc',name:'ojdbc8',version:'21.9.0.0')
+    implementation(group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.9.0.0')
 
-    // webservice start
     customTools 'org.apache.cxf:cxf-tools:4.0.0',
             'org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:4.0.0',
             'org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:4.0.0'
-    // webservice end
 
-    // cache dependencies start
     implementation(group: 'org.ehcache', name: 'ehcache', version: '3.10.0') {
         transitive = false
     }
@@ -78,20 +64,11 @@ dependencies {
     }
     implementation(group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1')
     implementation(group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.7')
-    // cache dependencies end
 
-    // commented dependency block that starts with {
-    //implementation(group: 'com.example.shared', name: 'example-security-starter', version: '2.1.3') {
-    //    exclude group: 'org.apache.logging.log4j'
-    //}
-
-    // commented fileTree usage
-    //implementation fileTree(include: ['*.jar'], dir: 'C:\\temp\\libs')
-
-    implementation ('com.example.shared:shared-location-api:3.0.+') {
-        exclude(group: 'org.apache.logging.log4j', module: 'log4j-api')
-        exclude(group: 'org.apache.logging.log4j', module: 'log4j-core')
-        exclude(group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl')
+    implementation('com.example.shared:shared-location-api:3.0.+') {
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
     }
 
     implementation 'com.example.shared:config-starter:3.3.0'
@@ -100,49 +77,32 @@ dependencies {
     implementation 'com.example.shared:file-api:3.0.1'
     implementation 'org.apache.commons:commons-lang3:3.18.0'
 
-    // another commented dependency with opening brace
-    //implementation('com.example.shared:file-smbj:1.0.18') {
-    //    exclude group: 'org.apache.logging.log4j'
-    //    exclude group: 'com.hierynomus'
-    //}
-
     implementation('com.example.shared:file-smbj:3.0.3') {
         exclude group: 'org.apache.logging.log4j'
         exclude group: 'com.hierynomus'
     }
 
     implementation 'com.hierynomus:smbj:0.11.5'
-    implementation "com.example.problem:problem-details-spring:3.0.+"
-    //implementation "com.example.problem:problem-details-spring:3.1.0"
-
+    implementation 'com.example.problem:problem-details-spring:3.0.+'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
 
-    // fake dependencies block inside comment should be ignored
-    /*
-    dependencies {
-        implementation 'fake:should-not-be-parsed:1.0.0'
-    }
-    */
-
     implementation("com.example.shared:db-api:3.0.+") {
-        exclude group: "org.apache.logging.log4j"
+        exclude group: 'org.apache.logging.log4j'
     }
     implementation("com.example.shared:db-db2:3.0.+") {
-        exclude group: "org.apache.logging.log4j"
+        exclude group: 'org.apache.logging.log4j'
     }
     implementation("com.example.shared:db-oracle:3.0.+") {
-        exclude group: "org.apache.logging.log4j"
+        exclude group: 'org.apache.logging.log4j'
     }
 
-    implementation "com.ibm.db2.jcc:db2jcc4:4.31.10"
-    implementation "com.ibm.db2.jcc:db2jcc_license_cisuz:4.24.92"
-    implementation("com.example.shared:db-spring-boot-starter:1.0.+")
-
-    // string containing braces should not affect parser
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0") // "{ not a real block }"
+    implementation 'com.ibm.db2.jcc:db2jcc4:4.31.10'
+    implementation 'com.ibm.db2.jcc:db2jcc_license_cisuz:4.24.92'
+    implementation 'com.example.shared:db-spring-boot-starter:1.0.+'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
