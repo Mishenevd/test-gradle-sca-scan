@@ -21,6 +21,17 @@ configurations {
     all {
         exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
         exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+
+        resolutionStrategy.eachDependency {
+			DependencyResolveDetails details ->
+				if (details.requested.group == 'org.apache.tomcat.embed') {
+					details.useVersion '9.0.104'
+				}
+                if (details.requested.group == 'ch.qos.logback') {
+                    details.useVersion '1.2.13'
+                }
+
+        }
     }
 }
 
