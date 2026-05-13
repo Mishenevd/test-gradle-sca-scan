@@ -23,7 +23,7 @@ configurations.all {
 
         eachDependency { details ->
             if (details.requested.group == 'com.fasterxml.jackson.core') {
-                details.useVersion '2.15.4'
+                details.useVersion '2.18.6'
             }
         }
 
